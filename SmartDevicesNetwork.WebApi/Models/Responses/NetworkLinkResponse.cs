@@ -1,3 +1,8 @@
 ﻿namespace SmartDevicesNetwork.WebApi.Models.Responses;
 
-public record NetworkLinkResponse(int Source, int Target, string Type);
+public class NetworkLinkResponse
+{
+    public int Source { get; set; }
+    public int Target { get; set; }
+    public string Type { get; set; }
+}

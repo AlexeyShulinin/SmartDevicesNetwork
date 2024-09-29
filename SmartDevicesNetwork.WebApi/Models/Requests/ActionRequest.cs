@@ -1,3 +1,5 @@
-﻿namespace SmartDevicesNetwork.WebApi.Models.Requests;
+﻿using SmartDevicesNetwork.WebApi.Enums;
 
-public record ActionRequest(string Action);
+namespace SmartDevicesNetwork.WebApi.Models.Requests;
+
+public record ActionRequest(Actions Action);

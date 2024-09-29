@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using SmartDevicesNetwork.WebApi.Database;
 using SmartDevicesNetwork.WebApi.Database.Models;
-using SmartDevicesNetwork.WebApi.Shared;
+using SmartDevicesNetwork.WebApi.Enums;
+using SmartDevicesNetwork.WebApi.Resources;
 
 namespace SmartDevicesNetwork.WebApi.BackgroundServices;
 
-public class NetworkEmulator(ILogger<NetworkEmulator> logger, IServiceProvider serviceProvider) : BackgroundService
+public class NetworkEmulator(
+    ILogger<NetworkEmulator> logger,
+    IServiceProvider serviceProvider,
+    IStringLocalizer<ApiMessages> apiMessagesLocalizer) : BackgroundService
 {
     private int countOfExecutions;
     
@@ -21,31 +26,37 @@ public class NetworkEmulator(ILogger<NetworkEmulator> logger, IServiceProvider s
     {
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<SdnDbContext>();
-
-        while (true)
+        
+        using var timer = new PeriodicTimer(TimeSpan.FromMinutes(1));
+        try
         {
-            await Task.Delay(1000 * 60 * 1, cancellationToken);
-
-            var devices = await dbContext.Devices.ToListAsync(cancellationToken);
+            while (await timer.WaitForNextTickAsync(cancellationToken))
+            {
+                var devices = await dbContext.Devices.ToListAsync(cancellationToken);
             
-            var devicesToReboot = devices.Where(x => x.Status == Statuses.Rebooting);
-            RebootDevices(devicesToReboot, dbContext);
+                var devicesToReboot = devices.Where(x => x.Status == Enum.GetName(Statuses.Rebooting));
+                RebootDevices(devicesToReboot, dbContext);
 
-            if (countOfExecutions % 100 == 0)
-            {
-                TurnOffRandomDevice(devices, dbContext);
-            }
+                if (countOfExecutions % 100 == 0)
+                {
+                    TurnOffRandomDevice(devices, dbContext);
+                }
 
-            try
-            {
-                await dbContext.SaveChangesAsync(cancellationToken);
-            }
-            catch (DbUpdateException e)
-            {
-                logger.LogError(e.Message);
-            }
+                try
+                {
+                    await dbContext.SaveChangesAsync(cancellationToken);
+                }
+                catch (DbUpdateException e)
+                {
+                    logger.LogError(e.Message);
+                }
 
-            countOfExecutions++;
+                countOfExecutions++;
+            }
+        }
+        catch (OperationCanceledException e)
+        {
+            logger.LogError(e.Message);
         }
     }
 
@@ -54,13 +65,13 @@ public class NetworkEmulator(ILogger<NetworkEmulator> logger, IServiceProvider s
         logger.LogInformation("Start rebooting...");
         foreach (var device in devices)
         {
-            device.Status = Statuses.Online;
+            device.Status = Enum.GetName(Statuses.Online);
 
             dbContext.DeviceLogs.Add(new DeviceLog()
             {
                 DeviceId = device.DeviceId,
                 TimeStamp = DateTime.UtcNow,
-                Message = "Device rebooted successfully"
+                Message = apiMessagesLocalizer[ApiMessages.DeviceRebootedSuccessMessage]
             });
         }
     }
@@ -68,13 +79,13 @@ public class NetworkEmulator(ILogger<NetworkEmulator> logger, IServiceProvider s
     private void TurnOffRandomDevice(List<Device> devices, SdnDbContext dbContext)
     {
         var randomDevice = devices[new Random().Next(1, devices.Count)];
-        randomDevice.Status = Statuses.Offline;
+        randomDevice.Status = Enum.GetName(Statuses.Offline);
         
         dbContext.DeviceLogs.Add(new DeviceLog()
         {
             DeviceId = randomDevice.DeviceId,
             TimeStamp = DateTime.UtcNow,
-            Message = "Device switched off"
+            Message = apiMessagesLocalizer[ApiMessages.DeviceSwitchedOffMessage]
         });
     }
 }

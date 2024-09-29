@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartDevicesNetwork.WebApi.Database;
 
@@ -11,9 +12,11 @@ using SmartDevicesNetwork.WebApi.Database;
 namespace SmartDevicesNetwork.WebApi.Database.Migrations
 {
     [DbContext(typeof(SdnDbContext))]
-    partial class SdnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240919184036_MigrationDateTimeOffset")]
+    partial class MigrationDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

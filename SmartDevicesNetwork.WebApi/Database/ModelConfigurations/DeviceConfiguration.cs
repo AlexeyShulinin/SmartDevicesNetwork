@@ -15,7 +15,7 @@ public class DeviceConfiguration : IEntityTypeConfiguration<Device>
         builder.Property(x => x.Type).HasMaxLength(50).IsUnicode();
         builder.Property(x => x.Status).HasMaxLength(20).IsUnicode();
         
-        builder.Property(x => x.LastActive).HasColumnType("datetime");
+        builder.Property(x => x.LastActive).HasColumnType("datetimeoffset");
         
         builder.Property(x => x.IpAddress).HasMaxLength(50).IsUnicode();
         builder.Property(x => x.FirmwareVersion).HasMaxLength(20).IsUnicode();

@@ -1,3 +1,9 @@
 ﻿namespace SmartDevicesNetwork.WebApi.Models.Responses;
 
-public record NetworkNodeResponse(int Id, string Name, string Type, string Status);
+public class NetworkNodeResponse
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Type { get; set; }
+    public string Status { get; set; }
+}
