@@ -150,11 +150,29 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a web sockets request.
+        /// </summary>
+        internal static string NotWebSocketRequest {
+            get {
+                return ResourceManager.GetString("NotWebSocketRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unhandled internal server error.
         /// </summary>
         internal static string UnhandledServerErrorMessage {
             get {
                 return ResourceManager.GetString("UnhandledServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not found validation object.
+        /// </summary>
+        internal static string ValidationObjectNotFound {
+            get {
+                return ResourceManager.GetString("ValidationObjectNotFound", resourceCulture);
             }
         }
     }

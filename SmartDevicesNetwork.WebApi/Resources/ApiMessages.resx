@@ -51,4 +51,10 @@
     <data name="DeviceSwitchedOffMessage" xml:space="preserve">
         <value>Device switched off</value>
     </data>
+    <data name="ValidationObjectNotFound" xml:space="preserve">
+        <value>Not found validation object</value>
+    </data>
+    <data name="NotWebSocketRequest" xml:space="preserve">
+        <value>Not a web sockets request</value>
+    </data>
 </root>

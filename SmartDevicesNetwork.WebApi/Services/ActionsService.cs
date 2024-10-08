@@ -33,7 +33,7 @@ public class ActionsService(
         var action = actions.GetValueOrDefault(actionRequest.Action);
         if (action == default)
         {
-            return new ActionResponse("Failed", string.Format(apiMessagesLocalizer[ApiMessages.ActionNotFoundErrorMessage], Enum.GetName(actionRequest.Action)));
+            return new ActionResponse("Failed", string.Format(apiMessagesLocalizer[ApiMessages.ActionNotFoundErrorMessage], actionRequest.Action));
         }
         
         var dbDevice = await unitOfWork.DevicesRepository.ByIdAsync(deviceId, cancellationToken);

@@ -18,4 +18,5 @@ public static partial class DeviceMapper
     [MapProperty(nameof(DeviceDtoModel.DeviceId), nameof(NetworkNodeResponse.Id))]
     private static partial NetworkNodeResponse MapToNetworkNodeResponse(this DevicesDtoModel entity);
     public static partial IEnumerable<NetworkNodeResponse> MapToResponse(this IEnumerable<DevicesDtoModel> entities);
+    public static partial IEnumerable<DeviceLogsResponse> MapToResponse(this IEnumerable<DevicesLogsDto> entities);
 }
