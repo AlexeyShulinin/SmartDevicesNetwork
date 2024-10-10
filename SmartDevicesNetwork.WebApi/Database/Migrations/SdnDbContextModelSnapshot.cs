@@ -38,8 +38,8 @@ namespace SmartDevicesNetwork.WebApi.Database.Migrations
                     b.Property<int>("DeviceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime");
+                    b.Property<DateTimeOffset>("TimeStamp")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("ActionId");
 
@@ -69,8 +69,8 @@ namespace SmartDevicesNetwork.WebApi.Database.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("LastActive")
-                        .HasColumnType("datetime");
+                    b.Property<DateTimeOffset>("LastActive")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -108,8 +108,8 @@ namespace SmartDevicesNetwork.WebApi.Database.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime");
+                    b.Property<DateTimeOffset>("TimeStamp")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("LogId");
 

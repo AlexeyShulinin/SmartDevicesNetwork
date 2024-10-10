@@ -14,7 +14,7 @@ public class ActionConfiguration : IEntityTypeConfiguration<Models_Action>
 
         builder.Property(x => x.ActionType).HasMaxLength(50).IsUnicode();
 
-        builder.Property(x => x.TimeStamp).HasColumnType("datetime");
+        builder.Property(x => x.TimeStamp).HasColumnType("datetimeoffset");
 
         builder.HasOne(x => x.Device)
             .WithMany()
