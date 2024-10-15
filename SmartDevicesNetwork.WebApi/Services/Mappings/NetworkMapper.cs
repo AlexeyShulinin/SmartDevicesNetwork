@@ -12,5 +12,6 @@ public static partial class NetworkMapper
     [MapProperty(nameof(NetworkLinkDtoModel.TargetId), nameof(NetworkLinkResponse.Target))]
     [MapProperty(nameof(NetworkLinkDtoModel.LinkType), nameof(NetworkLinkResponse.Type))]
     public static partial NetworkLinkResponse MapToResponse(this NetworkLinkDtoModel entity);
+    
     public static partial IEnumerable<NetworkLinkResponse> MapToResponse(this IEnumerable<NetworkLinkDtoModel> entities);
 }

@@ -42,7 +42,7 @@ builder.Services.AddDbContext<SdnDbContext>(options =>
 builder.Services.AddMemoryCache();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
-//builder.Services.AddHostedService<NetworkEmulator>();
+builder.Services.AddHostedService<NetworkEmulator>();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

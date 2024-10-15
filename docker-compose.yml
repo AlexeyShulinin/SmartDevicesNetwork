@@ -1,0 +1,17 @@
+﻿services:
+  smartdevicesnetwork.webapi:
+    build:
+      context: .
+      dockerfile: SmartDevicesNetwork.WebApi/Dockerfile
+    image: smart-devices-network-api
+    container_name: webapi
+    ports:
+      - "9010:8080"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__SmartDevicesNetwork=Server=host.docker.internal,1433;Database=SmartDevicesNetwork;User Id=user_id;Password=password;Connect Timeout=120;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - Cors__Name=localhost
+      - Cors__AllowedOrigins=*
+      - WebSocket__TimeSeconds=10

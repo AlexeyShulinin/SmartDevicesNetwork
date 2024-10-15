@@ -9,5 +9,6 @@ namespace SmartDevicesNetwork.WebApi.Services.Mappings;
 public static partial class MiscMapper
 {
     public static partial BaseEntityResponse MapToBaseEntityResponse(this BaseEntityDto dtoModel);
+    
     public static partial PageFilterDto MapToDto(this PageFilterRequest model); 
 }
