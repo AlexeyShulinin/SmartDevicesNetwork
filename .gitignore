@@ -1,4 +1,10 @@
 .idea
 bin
 obj
+log
+data
+secrets
 *.user
+*bin
+*.log
+*.mdf

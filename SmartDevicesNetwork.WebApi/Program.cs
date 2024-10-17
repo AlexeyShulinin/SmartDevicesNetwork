@@ -76,6 +76,12 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var sdnDbContext = scope.ServiceProvider.GetRequiredService<SdnDbContext>();
+    sdnDbContext.Database.Migrate();
+}
+
 app.RegisterEndpoints();
 
 if (app.Environment.IsDevelopment())

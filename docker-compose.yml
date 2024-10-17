@@ -1,17 +1,55 @@
 ﻿services:
   smartdevicesnetwork.webapi:
     build:
-      context: .
-      dockerfile: SmartDevicesNetwork.WebApi/Dockerfile
+      context: SmartDevicesNetwork.WebApi
+      dockerfile: Dockerfile
     image: smart-devices-network-api
     container_name: webapi
     ports:
-      - "9010:8080"
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "9010:9010"
+      - "9011:9011"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__SmartDevicesNetwork=Server=host.docker.internal,1433;Database=SmartDevicesNetwork;User Id=user_id;Password=password;Connect Timeout=120;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - ASPNETCORE_HTTP_PORTS=9010
+      - ASPNETCORE_HTTPS_PORTS=9011
+      - ConnectionStrings__SmartDevicesNetwork=Server=database,1433;Database=SmartDevicesNetwork;User Id=SA;Password=sdn_p@ss_123;TrustServerCertificate=True
       - Cors__Name=localhost
       - Cors__AllowedOrigins=*
       - WebSocket__TimeSeconds=10
+    depends_on:
+      database:
+        condition: service_healthy
+      
+  database:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: mssql.server
+    hostname: docker_mssql2022
+    user: root
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'someSt0nGP@_ss123'
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_TCP_PORT: 1433
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost, 1433 -U sa -P someSt0nGP@_ss123 -Q "SELECT 1"
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      
+  smart-devices-network-ui:
+    build:
+      context: ../smart-devices-network-ui
+      dockerfile: DockerFile
+    image: smart-devices-network-ui
+    container_name: smart-devices-network-ui
+    ports:
+      - "9001:9001"
+    depends_on:
+      - smartdevicesnetwork.webapi
