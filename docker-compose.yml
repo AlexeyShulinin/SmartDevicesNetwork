@@ -1,0 +1,58 @@
+﻿services:
+  smartdevicesnetwork.webapi:
+    build:
+      context: SmartDevicesNetwork.WebApi
+      dockerfile: Dockerfile
+    image: smart-devices-network-api
+    container_name: webapi
+    ports:
+      - "9010:9010"
+      - "9011:9011"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=9010
+      - ConnectionStrings__SmartDevicesNetwork=Server=database,1433;Database=SmartDevicesNetwork;User Id=SA;Password=someSt0nGP@ss123;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - Cors__Name=localhost
+      - Cors__AllowedOrigins=*
+      - WebSocket__TimeSeconds=10
+    depends_on:
+      - database
+    networks:
+      - smartdevicesnetwork
+      
+  database:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: mssql.server
+    hostname: docker_mssql2022
+    user: root
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=someSt0nGP@ss123
+    ports:
+      - "5533:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+    networks:
+      - smartdevicesnetwork
+      
+  smart-devices-network-ui:
+    build:
+      context: ../smart-devices-network-ui
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: 'http://localhost:9010'
+    image: smart-devices-network-ui
+    container_name: smart-devices-network-ui
+    ports:
+      - "9001:9001"
+    depends_on:
+      - smartdevicesnetwork.webapi
+    networks:
+      - smartdevicesnetwork
+
+networks:
+  smartdevicesnetwork:
+    driver: bridge
+
+volumes:
+  sqlvolume:

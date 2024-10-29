@@ -13,5 +13,6 @@ public interface IDevicesService
     Task<DeviceResponse> GetDeviceByIdAsync(int deviceId, CancellationToken cancellationToken);
     
     Task<PagedListResponse<DeviceLogsResponse>> LogsByDeviceIdAsync(int deviceId, PageFilterRequest filter, CancellationToken cancellationToken);
+    
     Task<PagedListResponse<DeviceLogsResponse>> LogsAsync(PageFilterRequest filter, CancellationToken cancellationToken);
 }

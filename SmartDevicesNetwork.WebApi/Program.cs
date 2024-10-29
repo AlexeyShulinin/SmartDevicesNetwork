@@ -42,7 +42,7 @@ builder.Services.AddDbContext<SdnDbContext>(options =>
 builder.Services.AddMemoryCache();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
-//builder.Services.AddHostedService<NetworkEmulator>();
+builder.Services.AddHostedService<NetworkEmulator>();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -75,6 +75,12 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var sdnDbContext = scope.ServiceProvider.GetRequiredService<SdnDbContext>();
+    sdnDbContext.Database.Migrate();
+}
 
 app.RegisterEndpoints();
 

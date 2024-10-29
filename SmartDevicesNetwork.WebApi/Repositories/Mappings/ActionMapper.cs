@@ -9,5 +9,6 @@ namespace SmartDevicesNetwork.WebApi.Repositories.Mappings;
 public static partial class ActionMapper
 {
     public static partial IQueryable<ActionsDtoModel> ProjectToDto(this IQueryable<Action> entities);
+    
     public static partial Action MapToEntity(this ActionsDtoModel model);
 }

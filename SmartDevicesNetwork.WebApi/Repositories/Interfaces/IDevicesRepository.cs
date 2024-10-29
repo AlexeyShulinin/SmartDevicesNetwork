@@ -14,5 +14,6 @@ public interface IDevicesRepository
     void Update(DeviceDtoModel device, string message);
     
     Task<PagedListDto<DevicesLogsDto>> LogsListByDeviceIdAsync(int deviceId, PageFilterDto filter, CancellationToken cancellationToken);
+    
     Task<PagedListDto<DevicesLogsDto>> LogsListAsync(PageFilterDto filter, CancellationToken cancellationToken);
 }
