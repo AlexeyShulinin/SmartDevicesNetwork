@@ -1,0 +1,35 @@
+﻿root = true
+
+[*]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Braces on new line for class, methods, blocks
+csharp_new_line_before_open_brace = all
+
+# Allow single-line auto-properties
+csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_blocks = true
+
+# Spacing rules
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+
+# Directives
+dotnet_sort_system_directives_first = true
+
+# StyleCop: forbid double spaces
+dotnet_diagnostic.SA1000.severity = error
+dotnet_diagnostic.SA1001.severity = error
+dotnet_diagnostic.SA1028.severity = error
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1200.severity = none
+dotnet_diagnostic.SA1413.severity = none
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1128.severity = none
+dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.SA1602.severity = none
+dotnet_diagnostic.SA1116.severity = none
