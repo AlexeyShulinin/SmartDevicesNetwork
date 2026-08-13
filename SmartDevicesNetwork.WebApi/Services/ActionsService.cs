@@ -13,7 +13,6 @@ using SmartDevicesNetwork.WebApi.Resources;
 using SmartDevicesNetwork.WebApi.Services.Interfaces;
 using SmartDevicesNetwork.WebApi.Shared;
 
-
 namespace SmartDevicesNetwork.WebApi.Services;
 
 public class ActionsService(
@@ -27,7 +26,7 @@ public class ActionsService(
         { Actions.Off, new(Statuses.Offline, apiMessagesLocalizer[ApiMessages.DeviceSwitchedOffSuccessMessage], apiMessagesLocalizer[ApiMessages.DeviceSwitchedOffErrorMessage]) },
         { Actions.Reboot, new(Statuses.Rebooting, apiMessagesLocalizer[ApiMessages.DeviceRebootSuccessMessage], apiMessagesLocalizer[ApiMessages.DeviceRebootErrorMessage]) }
     };
-    
+
     public async Task<ActionResponse> PerformActionAsync(int deviceId, ActionRequest actionRequest, CancellationToken cancellationToken)
     {
         var action = actions.GetValueOrDefault(actionRequest.Action);
@@ -35,13 +34,13 @@ public class ActionsService(
         {
             return new ActionResponse("Failed", string.Format(apiMessagesLocalizer[ApiMessages.ActionNotFoundErrorMessage], actionRequest.Action));
         }
-        
+
         var dbDevice = await unitOfWork.DevicesRepository.ByIdAsync(deviceId, cancellationToken);
         if (dbDevice == null)
         {
             return new ActionResponse("Failed", apiMessagesLocalizer[ApiMessages.DeviceNotFoundErrorMessage]);
         }
-        
+
         await Task.Delay(1000 * 5, cancellationToken);
 
         var countOfRequests = await CountOfRequestsAsync();
@@ -50,7 +49,7 @@ public class ActionsService(
             SetCountOfRequests(countOfRequests + 1);
             return await PerformAction("Failed", action.FailureMessage);
         }
-        
+
         dbDevice.Status = Enum.GetName(action.Status);
         return await PerformAction("Success", action.SuccessMessage);
 

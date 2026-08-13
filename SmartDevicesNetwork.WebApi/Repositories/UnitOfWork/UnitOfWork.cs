@@ -12,9 +12,11 @@ public class UnitOfWork(SdnDbContext dbContext) : IUnitOfWork
     private INetworkRepository networkRepository;
 
     public IActionsRepository ActionsRepository => actionsRepository ??= new ActionsRepository(dbContext);
+
     public IDevicesRepository DevicesRepository => devicesRepository ??= new DevicesRepository(dbContext);
+
     public INetworkRepository NetworkRepository => networkRepository ??= new NetworkRepository(dbContext);
-    
+
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         return dbContext.SaveChangesAsync(cancellationToken);

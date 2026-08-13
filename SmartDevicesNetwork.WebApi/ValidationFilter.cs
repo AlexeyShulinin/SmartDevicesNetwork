@@ -17,7 +17,7 @@ public class ValidationFilter<T>(IStringLocalizer<ApiMessages> apiMessagesLocali
         {
             return await next(context);
         }
-        
+
         var entity = context.Arguments
             .OfType<T>()
             .FirstOrDefault(a => a.GetType() == typeof(T));

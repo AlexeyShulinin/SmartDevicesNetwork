@@ -35,7 +35,7 @@ public class DevicesService(IUnitOfWork unitOfWork) : IDevicesService
         {
             throw new NotFoundException();
         }
-        
+
         return MapToPagedListResponse(await unitOfWork.DevicesRepository.LogsListByDeviceIdAsync(deviceId, filter.MapToDto(), cancellationToken), filter);
     }
 
@@ -44,7 +44,7 @@ public class DevicesService(IUnitOfWork unitOfWork) : IDevicesService
 
     private PagedListResponse<DeviceLogsResponse> MapToPagedListResponse(
         PagedListDto<DevicesLogsDto> devicePagedListDto, PageFilterRequest filter)
-        => new(devicePagedListDto.Items.MapToResponse(), 
+        => new(devicePagedListDto.Items.MapToResponse(),
             devicePagedListDto.CurrentPage,
             devicePagedListDto.Total,
             (filter.Page + 1) * filter.Limit < devicePagedListDto.Total ? filter.Page + 1 : null);

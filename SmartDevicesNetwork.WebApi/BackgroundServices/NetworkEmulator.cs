@@ -21,19 +21,19 @@ public class NetworkEmulator(
     IStringLocalizer<ApiMessages> apiMessagesLocalizer) : BackgroundService
 {
     private int countOfExecutions;
-    
+
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<SdnDbContext>();
-        
+
         using var timer = new PeriodicTimer(TimeSpan.FromMinutes(1));
         try
         {
             while (await timer.WaitForNextTickAsync(cancellationToken))
             {
                 var devices = await dbContext.Devices.ToListAsync(cancellationToken);
-            
+
                 var devicesToReboot = devices.Where(x => x.Status == Enum.GetName(Statuses.Rebooting));
                 RebootDevices(devicesToReboot, dbContext);
 
@@ -80,7 +80,7 @@ public class NetworkEmulator(
     {
         var randomDevice = devices[new Random().Next(1, devices.Count)];
         randomDevice.Status = Enum.GetName(Statuses.Offline);
-        
+
         dbContext.DeviceLogs.Add(new DeviceLog()
         {
             DeviceId = randomDevice.DeviceId,

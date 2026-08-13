@@ -7,7 +7,9 @@ namespace SmartDevicesNetwork.WebApi.Repositories.UnitOfWork;
 public interface IUnitOfWork
 {
     IActionsRepository ActionsRepository { get; }
+
     IDevicesRepository DevicesRepository { get; }
+
     INetworkRepository NetworkRepository { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

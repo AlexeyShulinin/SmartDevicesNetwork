@@ -68,7 +68,7 @@ var corsOptions = builder.Configuration.GetSection("Cors").Get<CorsOptions>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: corsOptions.Name,
-        policy  =>
+        policy =>
         {
             policy.WithOrigins(corsOptions.AllowedOrigins).AllowAnyMethod().AllowAnyHeader();
         });
@@ -97,7 +97,6 @@ var webSocketOptions = new WebSocketOptions
 {
     AllowedOrigins = { corsOptions.AllowedOrigins }
 };
-
 
 app.UseWebSockets(webSocketOptions);
 app.UseCors(corsOptions.Name);

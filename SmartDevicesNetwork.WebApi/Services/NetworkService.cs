@@ -1,5 +1,4 @@
-﻿
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using SmartDevicesNetwork.WebApi.Models.Responses;
 using SmartDevicesNetwork.WebApi.Repositories.UnitOfWork;

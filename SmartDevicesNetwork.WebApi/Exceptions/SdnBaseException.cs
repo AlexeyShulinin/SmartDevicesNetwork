@@ -9,6 +9,6 @@ public class SdnBaseException : Exception
     {
         StatusCode = statusCode;
     }
-    
+
     public HttpStatusCode StatusCode { get; set; }
 }

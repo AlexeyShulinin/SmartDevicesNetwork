@@ -10,8 +10,10 @@ public class PagedListDto<T>
         CurrentPage = currentPage;
         Total = total;
     }
-    
+
     public IEnumerable<T> Items { get; set; }
+
     public int CurrentPage { get; set; }
+
     public int Total { get; set; }
 }

@@ -26,3 +26,15 @@ docker run -p 9010:8080 smart-devices-network-api
 ```
 docker-compose up -d --build
 ```
+
+## Code format check:
+
+```
+dotnet format --verify-no-change
+```
+
+## Code analyzer:
+
+```
+dotnet format analyzers --verify-no-changes  
+```

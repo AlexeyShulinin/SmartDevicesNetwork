@@ -21,7 +21,7 @@ public static class WebSocketsEndpoint
     {
         app.MapGet("/ws", NetworkAsync);
     }
-    
+
     private static async Task NetworkAsync(
         INetworkService networkService,
         HttpContext context,
@@ -36,7 +36,7 @@ public static class WebSocketsEndpoint
 
         var webSocketOptions = new WebSocketOptions();
         configuration.GetSection("WebSocket").Bind(webSocketOptions);
-        
+
         using var ws = await context.WebSockets.AcceptWebSocketAsync();
         using var timer = new PeriodicTimer(TimeSpan.FromSeconds(webSocketOptions.TimeSeconds));
         try

@@ -35,7 +35,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartDevicesNetwork.WebApi.Resources.ApiMessages", typeof(ApiMessages).Assembly);
@@ -50,7 +50,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,7 +62,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Action {0} was not found.
         /// </summary>
-        internal static string ActionNotFoundErrorMessage {
+        public static string ActionNotFoundErrorMessage {
             get {
                 return ResourceManager.GetString("ActionNotFoundErrorMessage", resourceCulture);
             }
@@ -71,7 +71,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device wasn&apos;t found.
         /// </summary>
-        internal static string DeviceNotFoundErrorMessage {
+        public static string DeviceNotFoundErrorMessage {
             get {
                 return ResourceManager.GetString("DeviceNotFoundErrorMessage", resourceCulture);
             }
@@ -80,7 +80,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device rebooted successfully.
         /// </summary>
-        internal static string DeviceRebootedSuccessMessage {
+        public static string DeviceRebootedSuccessMessage {
             get {
                 return ResourceManager.GetString("DeviceRebootedSuccessMessage", resourceCulture);
             }
@@ -89,7 +89,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unable to reboot device.
         /// </summary>
-        internal static string DeviceRebootErrorMessage {
+        public static string DeviceRebootErrorMessage {
             get {
                 return ResourceManager.GetString("DeviceRebootErrorMessage", resourceCulture);
             }
@@ -98,7 +98,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device reboot was started successfully.
         /// </summary>
-        internal static string DeviceRebootSuccessMessage {
+        public static string DeviceRebootSuccessMessage {
             get {
                 return ResourceManager.GetString("DeviceRebootSuccessMessage", resourceCulture);
             }
@@ -107,7 +107,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unable to switch off device.
         /// </summary>
-        internal static string DeviceSwitchedOffErrorMessage {
+        public static string DeviceSwitchedOffErrorMessage {
             get {
                 return ResourceManager.GetString("DeviceSwitchedOffErrorMessage", resourceCulture);
             }
@@ -116,7 +116,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device switched off.
         /// </summary>
-        internal static string DeviceSwitchedOffMessage {
+        public static string DeviceSwitchedOffMessage {
             get {
                 return ResourceManager.GetString("DeviceSwitchedOffMessage", resourceCulture);
             }
@@ -125,7 +125,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device switched off successfully.
         /// </summary>
-        internal static string DeviceSwitchedOffSuccessMessage {
+        public static string DeviceSwitchedOffSuccessMessage {
             get {
                 return ResourceManager.GetString("DeviceSwitchedOffSuccessMessage", resourceCulture);
             }
@@ -134,7 +134,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unable to switch on device.
         /// </summary>
-        internal static string DeviceSwitchedOnErrorMessage {
+        public static string DeviceSwitchedOnErrorMessage {
             get {
                 return ResourceManager.GetString("DeviceSwitchedOnErrorMessage", resourceCulture);
             }
@@ -143,7 +143,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Device switched on successfully.
         /// </summary>
-        internal static string DeviceSwitchedOnSuccessMessage {
+        public static string DeviceSwitchedOnSuccessMessage {
             get {
                 return ResourceManager.GetString("DeviceSwitchedOnSuccessMessage", resourceCulture);
             }
@@ -152,7 +152,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Not a web sockets request.
         /// </summary>
-        internal static string NotWebSocketRequest {
+        public static string NotWebSocketRequest {
             get {
                 return ResourceManager.GetString("NotWebSocketRequest", resourceCulture);
             }
@@ -161,7 +161,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unhandled internal server error.
         /// </summary>
-        internal static string UnhandledServerErrorMessage {
+        public static string UnhandledServerErrorMessage {
             get {
                 return ResourceManager.GetString("UnhandledServerErrorMessage", resourceCulture);
             }
@@ -170,7 +170,7 @@ namespace SmartDevicesNetwork.WebApi.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Not found validation object.
         /// </summary>
-        internal static string ValidationObjectNotFound {
+        public static string ValidationObjectNotFound {
             get {
                 return ResourceManager.GetString("ValidationObjectNotFound", resourceCulture);
             }

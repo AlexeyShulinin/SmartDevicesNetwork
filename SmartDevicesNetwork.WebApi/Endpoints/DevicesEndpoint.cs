@@ -16,7 +16,7 @@ public static class DevicesEndpoint
     {
         var api = app.MapGroup("/api/")
             .WithOpenApi();
-        
+
         api.MapGet("devices", DevicesAsync)
             .WithOpenApi(x => new OpenApiOperation(x)
             {
@@ -24,7 +24,7 @@ public static class DevicesEndpoint
                 Description = "Retrieve a list of all devices."
             })
             .Produces<List<DevicesResponse>>();
-        
+
         api.MapGet("devices/{id}", DeviceByIdAsync)
             .WithOpenApi(x => new OpenApiOperation(x)
             {
@@ -32,7 +32,7 @@ public static class DevicesEndpoint
                 Description = "Retrieve detailed information about a specific device by its ID."
             })
             .Produces<DeviceResponse>();
-        
+
         api.MapPost("devices/{id}/action", PerformActionAsync)
             .WithOpenApi(x => new OpenApiOperation(x)
             {
@@ -41,7 +41,7 @@ public static class DevicesEndpoint
             })
             .Produces<ActionResponse>()
             .AddEndpointFilter<ValidationFilter<ActionRequest>>();
-        
+
         api.MapPost("devices/{id}/logs", LogsByDeviceIdAsync)
             .WithOpenApi(x => new OpenApiOperation(x)
             {
@@ -49,7 +49,7 @@ public static class DevicesEndpoint
                 Description = "Retrieve device logs."
             })
             .Produces<PagedListResponse<DeviceLogsResponse>>();
-        
+
         api.MapPost("devices/logs", LogsAsync)
             .WithOpenApi(x => new OpenApiOperation(x)
             {
@@ -67,10 +67,10 @@ public static class DevicesEndpoint
 
     private static Task<ActionResponse> PerformActionAsync(int id, ActionRequest actionRequest, IActionsService actionService, CancellationToken cancellationToken)
         => actionService.PerformActionAsync(id, actionRequest, cancellationToken);
-    
+
     private static Task<PagedListResponse<DeviceLogsResponse>> LogsByDeviceIdAsync(int id, PageFilterRequest filter, IDevicesService devicesService, CancellationToken cancellationToken)
         => devicesService.LogsByDeviceIdAsync(id, filter, cancellationToken);
-    
+
     private static Task<PagedListResponse<DeviceLogsResponse>> LogsAsync(PageFilterRequest filter, IDevicesService devicesService, CancellationToken cancellationToken)
         => devicesService.LogsAsync(filter, cancellationToken);
 }

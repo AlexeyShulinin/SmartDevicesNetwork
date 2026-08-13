@@ -11,7 +11,7 @@ public static class ServiceCollectionExtensions
     {
         serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     }
-    
+
     public static void AddServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<IActionsService, ActionsService>();
