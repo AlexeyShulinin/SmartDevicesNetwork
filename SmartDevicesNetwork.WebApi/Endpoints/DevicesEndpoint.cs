@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.OpenApi.Models;
 using SmartDevicesNetwork.WebApi.Models.Requests;
 using SmartDevicesNetwork.WebApi.Models.Responses;
 using SmartDevicesNetwork.WebApi.Services.Interfaces;
@@ -14,47 +13,51 @@ public static class DevicesEndpoint
 {
     public static void RegisterDevicesEndpoints(this WebApplication app)
     {
-        var api = app.MapGroup("/api/")
-            .WithOpenApi();
+        var api = app.MapGroup("/api/");
 
         api.MapGet("devices", DevicesAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Get list of devices",
-                Description = "Retrieve a list of all devices."
+                operation.Summary = "Get list of devices";
+                operation.Description = "Retrieve a list of all devices.";
+                return Task.CompletedTask;
             })
             .Produces<List<DevicesResponse>>();
 
         api.MapGet("devices/{id}", DeviceByIdAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Get device details",
-                Description = "Retrieve detailed information about a specific device by its ID."
+                operation.Summary = "Get device details";
+                operation.Description = "Retrieve detailed information about a specific device by its ID.";
+                return Task.CompletedTask;
             })
             .Produces<DeviceResponse>();
 
         api.MapPost("devices/{id}/action", PerformActionAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Perform action",
-                Description = "Perform an action on a device (turn on, reboot, etc.)."
+                operation.Summary = "Perform action";
+                operation.Description = "Perform an action on a device (turn on, reboot, etc.).";
+                return Task.CompletedTask;
             })
             .Produces<ActionResponse>()
             .AddEndpointFilter<ValidationFilter<ActionRequest>>();
 
         api.MapPost("devices/{id}/logs", LogsByDeviceIdAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Get device logs",
-                Description = "Retrieve device logs."
+                operation.Summary = "Get device logs";
+                operation.Description = "Retrieve device logs.";
+                return Task.CompletedTask;
             })
             .Produces<PagedListResponse<DeviceLogsResponse>>();
 
         api.MapPost("devices/logs", LogsAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Get all device logs",
-                Description = "Retrieve device logs."
+                operation.Summary = "Get all device logs";
+                operation.Description = "Retrieve device logs.";
+                return Task.CompletedTask;
             })
             .Produces<PagedListResponse<DeviceLogsResponse>>();
     }

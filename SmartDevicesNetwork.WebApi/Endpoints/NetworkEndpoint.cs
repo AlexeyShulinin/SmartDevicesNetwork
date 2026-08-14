@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.OpenApi.Models;
 using SmartDevicesNetwork.WebApi.Models.Responses;
 using SmartDevicesNetwork.WebApi.Services.Interfaces;
 
@@ -11,16 +9,16 @@ namespace SmartDevicesNetwork.WebApi.Endpoints;
 
 public static class NetworkEndpoint
 {
-    public static void RegisterNetwrorkEndpoints(this WebApplication app)
+    public static void RegisterNetworkEndpoints(this WebApplication app)
     {
-        var api = app.MapGroup("/api/")
-            .WithOpenApi();
+        var api = app.MapGroup("/api/");
 
         api.MapGet("network", NetworkAsync)
-            .WithOpenApi(x => new OpenApiOperation(x)
+            .AddOpenApiOperationTransformer((operation, _, _) =>
             {
-                Summary = "Get current network",
-                Description = "Retrieve the network topology (list of devices and their connections)."
+                operation.Summary = "Get current network";
+                operation.Description = "Retrieve the network topology (list of devices and their connections).";
+                return Task.CompletedTask;
             })
             .Produces<NetworkResponse>();
     }

@@ -7,7 +7,7 @@ public static class RegisterEndpoint
     public static void RegisterEndpoints(this WebApplication app)
     {
         app.RegisterDevicesEndpoints();
-        app.RegisterNetwrorkEndpoints();
+        app.RegisterNetworkEndpoints();
         app.RegisterWebSocketsEndpoints();
     }
 }
