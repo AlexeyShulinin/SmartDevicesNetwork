@@ -17,6 +17,7 @@ jobs:
           dotnet-version: ${{ vars.DOTNET_VERSION }}
           
       - name: Cache NuGet packages
+        id: cache
         uses: actions/cache@v4
         with:
           path: ~/.nuget/packages
