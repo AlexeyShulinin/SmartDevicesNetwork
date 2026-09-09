@@ -41,4 +41,4 @@ jobs:
         run: dotnet format analyzers --verify-no-changes
 
       - name: Unit tests
-         run: dotnet test
+        run: dotnet test
