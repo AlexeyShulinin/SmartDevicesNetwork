@@ -1,0 +1,44 @@
+﻿name: Working with Actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      DOTNET_INSTALL_DIR: '.\.dotnet'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+
+      - name: Set up dotnet
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ vars.DOTNET_VERSION }}
+          
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build SmartDevicesNetwork.WebApi --no-restore
+
+      - name: Format check
+        run: dotnet format --verify-no-changes
+
+      - name: Code analysis
+        run: dotnet format analyzers --verify-no-changes
+
+      - name: Unit tests
+         run: dotnet test
