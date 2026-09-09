@@ -16,7 +16,7 @@ jobs:
       - name: Set up dotnet
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: ${{ vars.DOTNET_VERSION }}
 
       - name: Restore
         run: dotnet restore
