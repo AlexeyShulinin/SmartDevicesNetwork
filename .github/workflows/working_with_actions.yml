@@ -25,8 +25,8 @@ jobs:
           restore-keys: |
             nuget-${{ runner.os }}-
 
+      # Even for cache-hit, we still need to restore assets (project.assets.json).
       - name: Restore
-        if: steps.cache.outputs.cache-hit != 'true'
         run: dotnet restore
 
       - name: Build
