@@ -19,3 +19,15 @@ jobs:
         with:
           dotnet-version: ${{ vars.DOTNET_VERSION }}
           project-name: ${{ env.PROJECT_NAME }}
+          
+      - name: Build Docker images
+        run: |
+          docker build -t smartdevicesnetwork-webapi:latest -f ${{ env.PROJECT_NAME }}/Dockerfile .
+          docker save smartdevicesnetwork-webapi:latest -o webapi-image.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapi-docker-image
+          path: webapi-image.tar
+      
