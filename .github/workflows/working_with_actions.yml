@@ -2,6 +2,9 @@
 
 on:
   workflow_dispatch:
+    
+env:
+  PROJECT_NAME: SmartDevicesNetwork.WebApi
 
 jobs:
   build:
@@ -15,3 +18,4 @@ jobs:
         uses: ./.github/actions/setup-dotnet
         with:
           dotnet-version: ${{ vars.DOTNET_VERSION }}
+          project-name: ${{ env.PROJECT_NAME }}

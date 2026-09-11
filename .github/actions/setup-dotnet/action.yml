@@ -5,6 +5,9 @@ inputs:
   dotnet-version:
     required: true
     default: "10.0.x"
+  project-name:
+    required: true
+    default: "SmartDevicesNetwork.WebApi"
   
 runs:
   using: "composite"
@@ -29,15 +32,20 @@ runs:
     # Even for cache-hit, we still need to restore assets (project.assets.json).
     - name: Restore
       run: dotnet restore
+      shell: bash
 
     - name: Build
-      run: dotnet build SmartDevicesNetwork.WebApi --no-restore
+      run: dotnet build ${{ inputs.project-name }} --no-restore
+      shell: bash
 
     - name: Format check
       run: dotnet format --verify-no-changes
+      shell: bash
 
     - name: Code analysis
       run: dotnet format analyzers --verify-no-changes
+      shell: bash
 
     - name: Unit tests
       run: dotnet test
+      shell: bash
