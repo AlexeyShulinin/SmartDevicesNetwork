@@ -12,6 +12,6 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up dotnet via composite action
-        uses: ./.github/actions/setup-dotnet-tests
+        uses: ./.github/actions/setup-dotnet
         with:
           dotnet-version: ${{ vars.DOTNET_VERSION }}
