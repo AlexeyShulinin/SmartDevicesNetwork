@@ -15,7 +15,7 @@ runs:
     - name: Set up dotnet
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: ${{ vars.DOTNET_VERSION }}
+        dotnet-version: ${{ inputs.dotnet-version }}
 
     - name: Cache NuGet packages
       id: cache
