@@ -5,6 +5,7 @@ on:
     
 env:
   PROJECT_NAME: SmartDevicesNetwork.WebApi
+  WEB_API_DOCKER_IMAGE: smart-devices-network-api.tar
 
 jobs:
   build:
@@ -22,11 +23,11 @@ jobs:
           
       - name: Save Docker image
         run: |
-          docker save smart-devices-network-api:latest -o smart-devices-network-api.tar
+          docker save smart-devices-network-api:latest -o ${{ env.WEB_API_DOCKER_IMAGE }}
 
       - name: Upload Docker image artifact
         uses: actions/upload-artifact@v4
         with:
           name: webapi-docker-image
-          path: webapi-image.tar
+          path: ${{ env.WEB_API_DOCKER_IMAGE }}
       
