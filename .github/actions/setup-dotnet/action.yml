@@ -32,7 +32,7 @@ runs:
       shell: bash
 
     - name: Build
-      run: dotnet build ${{ inputs.project-name }} --no-restore
+      run: dotnet build ${{ inputs.project-name }} --configuration Release --no-restore
       shell: bash
 
     - name: Format check
