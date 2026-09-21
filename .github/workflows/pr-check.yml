@@ -14,10 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs: 
-      build-result: ${{ steps.build.result }}
-      format-result: ${{ steps.format.result }}
-      analyze-result: ${{ steps.analyze.result }}
-      test-result: ${{ steps.test.result }}
+      build-result: ${{ steps.build.outputs.result }}
+      format-result: ${{ steps.format.outputs.result }}
+      analyze-result: ${{ steps.analyze.outputs.result }}
+      test-result: ${{ steps.test.outputs.result }}
 
     steps:
       - name: Checkout
