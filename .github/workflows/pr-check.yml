@@ -13,6 +13,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs: 
+      build-result: ${{ steps.build.result }}
+      format-result: ${{ steps.format.result }}
+      analyze-result: ${{ steps.analyze.result }}
+      test-result: ${{ steps.test.result }}
 
     steps:
       - name: Checkout
@@ -69,9 +74,9 @@ jobs:
           body: |
             ### CI Status ❌
             
-            **Build:** ${{ job.status == 'failure' && 'Failure' || 'Success' }}  
-            **Format:** ${{ job.status == 'failure' && 'Failure' || 'Success' }}  
-            **Analyze:** ${{ job.status == 'failure' && 'Failure' || 'Success' }}  
-            **Tests:** ${{ job.status == 'failure' && 'Failure' || 'Success' }}  
+            **Build:** ${{ needs.build.outputs.build-result }}  
+            **Format:** ${{ needs.build.outputs.format-result }}  
+            **Analyze:** ${{ needs.build.outputs.analyze-result }}  
+            **Tests:** ${{ needs.build.outputs.test-result }}  
             
             🔴 Some checks failed — please review the logs and fix the issues.
