@@ -32,16 +32,20 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build SmartDevicesNetwork.WebApi
+        run: |
+          dotnet build SmartDevicesNetwork.WebApi && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
 
       - name: Format check
-        run: dotnet format --verify-no-changes
+        run: |
+          dotnet format --verify-no-changes && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
 
       - name: Code analysis
-        run: dotnet format analyzers --verify-no-changes
+        run: | 
+          dotnet format analyzers --verify-no-changes && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
 
       - name: Unit tests
-        run: dotnet test
+        run: |
+          dotnet test && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
   
   create-pr-comment:
     runs-on: ubuntu-latest
