@@ -33,19 +33,59 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build SmartDevicesNetwork.WebApi && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
+          set +e
+          dotnet build SmartDevicesNetwork.WebApi
+          exit_code=$?
+          if [ $exit_code -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
+      
+          set -e
+          exit $exit_code
 
       - name: Format check
         run: |
-          dotnet format --verify-no-changes && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
+          set +e
+          dotnet format --verify-no-changes
+          exit_code=$?
+          if [ $exit_code -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
+          
+          set -e
+          exit $exit_code
 
       - name: Code analysis
-        run: | 
-          dotnet format analyzers --verify-no-changes && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
+        run: |
+          set +e
+          dotnet format analyzers --verify-no-changes
+          exit_code=$?
+          if [ $exit_code -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
+          
+          set -e
+          exit $exit_code
 
       - name: Unit tests
         run: |
-          dotnet test && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
+          set +e
+          dotnet test
+          exit_code=$?
+          if [ $exit_code -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
+          
+          set -e
+          exit $exit_code
   
   create-pr-comment:
     runs-on: ubuntu-latest
