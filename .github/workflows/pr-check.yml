@@ -41,6 +41,7 @@ jobs:
   create-pr-comment:
     runs-on: ubuntu-latest
     needs: build
+    if: ${{ needs.build.result == 'failure' || needs.build.result == 'success' }}
 
     steps:
       - name: Create or update success PR comment
