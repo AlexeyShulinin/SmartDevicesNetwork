@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Create or update success PR comment
-        if: success()
+        if: ${{ needs.build.result == 'success' }}
         uses: peter-evans/create-or-update-comment@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +61,7 @@ jobs:
             🟢 All checks passed — ready for merge.
             
       - name: Create or update failure PR comment
-        if: failure()
+        if: ${{ needs.build.result == 'failure' }}
         uses: peter-evans/create-or-update-comment@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
