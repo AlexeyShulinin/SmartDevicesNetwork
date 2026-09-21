@@ -33,19 +33,19 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build SmartDevicesNetwork.WebApi && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
+          dotnet build SmartDevicesNetwork.WebApi && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Format check
         run: |
-          dotnet format --verify-no-changes && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
+          dotnet format --verify-no-changes && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Code analysis
         run: | 
-          dotnet format analyzers --verify-no-changes && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
+          dotnet format analyzers --verify-no-changes && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Unit tests
         run: |
-          dotnet test && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failure" >> $GITHUB_OUTPUT
+          dotnet test && echo "result=success" >> $GITHUB_OUTPUT || echo "result=failure" >> $GITHUB_OUTPUT
   
   create-pr-comment:
     runs-on: ubuntu-latest
