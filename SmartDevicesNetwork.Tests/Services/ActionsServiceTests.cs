@@ -57,7 +57,7 @@ public class ActionsServiceTests
         // Assert response and side effects
         Assert.Equal("Failed", result.Status);
         Assert.Equal(ApiMessages.DeviceSwitchedOnErrorMessage, result.Message);
-        Assert.Equal("Offline", device.Status);
+        Assert.Equal("Offline1", device.Status);
 
         Assert.True(memoryCache.TryGetValue(CacheConstants.ActionRequestCountKey, out int updatedCount));
         Assert.Equal(1, updatedCount);
