@@ -32,6 +32,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
+        id: build
         run: |
           set +e
           dotnet build SmartDevicesNetwork.WebApi
@@ -46,6 +47,7 @@ jobs:
           exit $exit_code
 
       - name: Format check
+        id: format
         run: |
           set +e
           dotnet format --verify-no-changes
@@ -60,6 +62,7 @@ jobs:
           exit $exit_code
 
       - name: Code analysis
+        id: analyze
         run: |
           set +e
           dotnet format analyzers --verify-no-changes
@@ -74,6 +77,7 @@ jobs:
           exit $exit_code
 
       - name: Unit tests
+        id: test
         run: |
           set +e
           dotnet test
