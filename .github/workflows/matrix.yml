@@ -13,6 +13,12 @@ jobs:
       matrix:
         versions: [9.0, 10.0]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: windows-latest
+            versions: 8.0
+        exclude:
+          - os: macos-latest
+            versions: 9.0
         
     steps:
       - name: Checkout
