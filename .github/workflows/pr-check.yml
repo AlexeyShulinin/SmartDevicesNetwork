@@ -1,4 +1,4 @@
-﻿name: Pull Request Check
+﻿name: Pull Request Check v2
 
 on:
   pull_request:
