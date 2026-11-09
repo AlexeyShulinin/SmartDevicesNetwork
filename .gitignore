@@ -9,3 +9,4 @@ secrets
 *bin
 *.log
 *.mdf
+TestResults
