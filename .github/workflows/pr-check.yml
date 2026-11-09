@@ -15,4 +15,4 @@ jobs:
     uses: AlexeyShulinin/github-actions/.github/workflows/pr-check.yml@master
     with: 
       dotnet-version: ${{ vars.DOTNET_VERSION }}
-      project-name: 'SmartDevicesNetwork.Webapi'
+      project-name: 'SmartDevicesNetwork.WebApi'
