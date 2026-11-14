@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     steps:
       - name: Checkout
@@ -34,7 +34,7 @@ jobs:
           path: ${{ env.WEB_API_DOCKER_IMAGE }}
   
   upload-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
     
     steps:
